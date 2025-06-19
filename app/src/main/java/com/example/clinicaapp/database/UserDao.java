@@ -22,4 +22,10 @@ public interface UserDao {
 
     @Query("SELECT * FROM users")
     List<User> getAllUsers();
+
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    User findByEmail(String email);
+
+    @Query("SELECT name FROM users WHERE id = :userId")
+    String getUserNameById(int userId);
 }

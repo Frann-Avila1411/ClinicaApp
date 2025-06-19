@@ -1,7 +1,6 @@
 package com.example.clinicaapp.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.clinicaapp.R;
 import com.example.clinicaapp.database.AppDatabase;
 import com.example.clinicaapp.model.User;
+import com.example.clinicaapp.utils.SessionManager;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -21,6 +21,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView tvGoToRegister;
 
     AppDatabase db;
+    SessionManager sessionManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         db = AppDatabase.getInstance(this);
+        sessionManager = new SessionManager(this);
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
@@ -40,11 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
             User user = db.userDao().login(email, password);
             if (user != null) {
-                SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putInt("userId", user.id);
-                editor.putString("userType", user.userType);
-                editor.apply();
+                sessionManager.saveSession(user.id, user.userType);
 
                 startActivity(new Intent(this, HomeActivity.class));
                 finish();

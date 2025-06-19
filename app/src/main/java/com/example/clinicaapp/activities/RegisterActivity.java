@@ -7,7 +7,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
+import com.example.clinicaapp.utils.SessionManager;
 import com.example.clinicaapp.R;
 import com.example.clinicaapp.database.AppDatabase;
 import com.example.clinicaapp.model.User;
@@ -20,10 +21,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     AppDatabase db;
 
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        sessionManager = new SessionManager(this);
 
         db = AppDatabase.getInstance(this);
 
@@ -40,10 +44,23 @@ public class RegisterActivity extends AppCompatActivity {
             user.password = etPassword.getText().toString();
             user.userType = spinnerUserType.getSelectedItem().toString();
 
+            // Insertar usuario
             db.userDao().insert(user);
-            Toast.makeText(this, "Registro exitoso. Inicia sesión.", Toast.LENGTH_SHORT).show();
 
-            finish();
+            // Recuperar usuario recién insertado (puede usar el correo para obtenerlo)
+            User insertedUser = db.userDao().findByEmail(user.email);
+
+            if (insertedUser != null) {
+                // Guardar sesión
+                sessionManager.saveSession(insertedUser.id, insertedUser.userType);
+
+                // Redirigir al Home
+                Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, HomeActivity.class));
+                finish();
+            } else {
+                Toast.makeText(this, "Error al registrar", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }
