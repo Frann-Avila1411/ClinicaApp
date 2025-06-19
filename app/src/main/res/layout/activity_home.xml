@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- res/layout/activity_home.xml -->
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/home_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Aquí luego cargaremos los fragments desde el Navigation Drawer -->
+
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
