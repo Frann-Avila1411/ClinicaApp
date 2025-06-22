@@ -30,12 +30,12 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         this.listener = listener;
     }
 
-    // Constructor corregido: solo recibe la lista
+    // Constructor que recibe la lista
     public AppointmentAdapter(List<AppointmentWithPatient> appointmentList) {
         this.appointmentList = appointmentList;
     }
 
-    // Método para actualizar la lista y refrescar la vista
+    // metodo para actualizar la lista y refrescar la vista
     public void setAppointments(List<AppointmentWithPatient> citas) {
         this.appointmentList = citas;
         notifyDataSetChanged();

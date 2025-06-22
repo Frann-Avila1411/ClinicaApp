@@ -71,7 +71,7 @@ public class AppointmentsFragment extends Fragment {
             }
         });
 
-        loadAppointments(); // Ahora sí, después de configurar el adapter
+        loadAppointments();
 
         return view;
     }

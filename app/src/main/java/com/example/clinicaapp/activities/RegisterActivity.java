@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
             // Insertar usuario
             db.userDao().insert(user);
 
-            // Recuperar usuario recién insertado (puede usar el correo para obtenerlo)
+            // Recuperar usuario recién insertado
             User insertedUser = db.userDao().findByEmail(user.email);
 
             if (insertedUser != null) {

@@ -8,6 +8,6 @@ public class AppointmentWithPatient {
     @Embedded
     public Appointment appointment;
 
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "patientName")
     public String patientName;
 }

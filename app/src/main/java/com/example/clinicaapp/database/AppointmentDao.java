@@ -26,7 +26,7 @@ public interface AppointmentDao {
     @Delete
     void delete(Appointment appointment);
 
-    @Query("SELECT a.*, u.name AS patientName FROM appointments a INNER JOIN users u ON a.patientId = u.id")
+    @Query("SELECT a.*, p.name AS patientName FROM appointments a INNER JOIN patient p ON a.patientId = p.id")
     List<AppointmentWithPatient> getAllAppointmentsWithPatient();
 
     @Query("SELECT * FROM appointments WHERE patientId = :patientId")
