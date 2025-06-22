@@ -13,6 +13,10 @@
             android:icon="@drawable/baseline_medical_services_24"
             android:title="Citas Médicas" />
         <item
+            android:id="@+id/nav_add_patient"
+            android:icon="@drawable/baseline_accessibility_24"
+            android:title="Agregar Paciente"/>
+        <item
             android:id="@+id/nav_medical_records"
             android:icon="@drawable/baseline_app_registration_24"
             android:title="Expedientes"/>
@@ -22,7 +26,7 @@
             android:title="Agregar Cita"/>
         <item
             android:id="@+id/nav_add_medical_record"
-            android:icon="@drawable/baseline_cancel_24"
+            android:icon="@drawable/baseline_add_chart_24"
             android:title="Agregar Expediente"/>
         <item
             android:id="@+id/nav_logout"

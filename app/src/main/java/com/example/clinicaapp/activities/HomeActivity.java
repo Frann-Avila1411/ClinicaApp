@@ -13,14 +13,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import com.example.clinicaapp.R;
 import com.example.clinicaapp.database.AppDatabase;
 import com.example.clinicaapp.fragments.AddApointmentFragment;
 import com.example.clinicaapp.fragments.AddMedicalRecordFragment;
+import com.example.clinicaapp.fragments.AddPatientFragment;
 import com.example.clinicaapp.fragments.AppointmentsFragment;
 import com.example.clinicaapp.fragments.RecordFragment;
 import com.example.clinicaapp.utils.SessionManager;
 import com.google.android.material.navigation.NavigationView;
+import com.example.clinicaapp.R;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -87,11 +88,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_add_appointment) {
             loadFragment(new AddApointmentFragment());
         }
+            else if (id == R.id.nav_add_patient){
+                loadFragment(new AddPatientFragment());
+        }
           else if (id == R.id.nav_add_medical_record) {
               loadFragment(new AddMedicalRecordFragment());
             }
          else if (id == R.id.nav_medical_records) {
-            loadFragment(new RecordFragment()); // Cambia a tu fragmento correcto si tiene otro nombre
+            loadFragment(new RecordFragment());
         } else if (id == R.id.nav_logout) {
             sessionManager.clearSession();
             Intent intent = new Intent(this, LoginActivity.class);

@@ -10,15 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clinicaapp.R;
-import com.example.clinicaapp.database.AppDatabase;
 import com.example.clinicaapp.model.Appointment;
+import com.example.clinicaapp.model.AppointmentWithPatient;
 
 import java.util.List;
 
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.AppointmentViewHolder> {
 
-    private List<Appointment> appointmentList;
-    private AppDatabase db;
+    private List<AppointmentWithPatient> appointmentList;
 
     public interface OnAppointmentClickListener {
         void onEditClick(Appointment appointment);
@@ -31,13 +30,15 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         this.listener = listener;
     }
 
-    public AppointmentAdapter(List<Appointment> appointmentList, AppDatabase db) {
+    // Constructor corregido: solo recibe la lista
+    public AppointmentAdapter(List<AppointmentWithPatient> appointmentList) {
         this.appointmentList = appointmentList;
-        this.db = db;
     }
 
-    public void setAppointments(List<Appointment> citas) {
+    // Método para actualizar la lista y refrescar la vista
+    public void setAppointments(List<AppointmentWithPatient> citas) {
         this.appointmentList = citas;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -50,18 +51,15 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull AppointmentViewHolder holder, int position) {
-        Appointment appointment = appointmentList.get(position);
+        AppointmentWithPatient item = appointmentList.get(position);
+        Appointment appointment = item.appointment;
 
-        String patientName = db.userDao().getUserNameById(appointment.getPatientId());
-        String doctorName = db.userDao().getUserNameById(appointment.getDoctorId());
-
-        holder.tvPatientName.setText("Paciente: " + patientName);
-        holder.tvDoctorName.setText("Doctor: " + doctorName);
+        holder.tvPatientName.setText("Paciente: " + item.patientName);
+        holder.tvDoctorName.setText("Doctor: " + appointment.getDoctorName());
         holder.tvDate.setText("Fecha: " + appointment.getDate());
         holder.tvTime.setText("Hora: " + appointment.getTime());
         holder.tvStatus.setText("Estado: " + appointment.getStatus());
 
-        // Enlazar acciones de botones
         holder.btnEdit.setOnClickListener(v -> {
             if (listener != null) listener.onEditClick(appointment);
         });

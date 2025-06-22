@@ -9,12 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/etPatientId"
-            android:hint="ID del Paciente"
-            android:inputType="number"
+        <AutoCompleteTextView
+            android:id="@+id/actvPatientName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="Nombre del paciente"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
 
         <EditText
             android:id="@+id/etDoctorId"

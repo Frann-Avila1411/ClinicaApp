@@ -16,7 +16,9 @@ import com.example.clinicaapp.R;
 import com.example.clinicaapp.adapters.AppointmentAdapter;
 import com.example.clinicaapp.database.AppDatabase;
 import com.example.clinicaapp.model.Appointment;
+import com.example.clinicaapp.model.AppointmentWithPatient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentsFragment extends Fragment {
@@ -36,20 +38,13 @@ public class AppointmentsFragment extends Fragment {
 
         db = AppDatabase.getInstance(getContext());
 
-        loadAppointments();
-
-        return view;
-    }
-
-    private void loadAppointments() {
-        List<Appointment> appointmentList = db.appointmentDao().getAll();
-
-        adapter = new AppointmentAdapter(appointmentList, db);
+        // Inicializar adaptador con lista vacía
+        adapter = new AppointmentAdapter(new ArrayList<>());
+        recyclerView.setAdapter(adapter);
 
         adapter.setOnAppointmentClickListener(new AppointmentAdapter.OnAppointmentClickListener() {
             @Override
             public void onEditClick(Appointment appointment) {
-                // Navegar al fragmento de edición con el ID de la cita
                 Bundle bundle = new Bundle();
                 bundle.putInt("appointment_id", appointment.getId());
 
@@ -69,19 +64,25 @@ public class AppointmentsFragment extends Fragment {
                         .setMessage("¿Estás seguro de eliminar esta cita?")
                         .setPositiveButton("Sí", (dialog, which) -> {
                             db.appointmentDao().delete(appointment);
-                            refreshAppointments(); // Recargar citas luego de eliminar
+                            refreshAppointments();
                         })
                         .setNegativeButton("No", null)
                         .show();
             }
         });
 
-        recyclerView.setAdapter(adapter);
+        loadAppointments(); // Ahora sí, después de configurar el adapter
+
+        return view;
+    }
+
+    private void loadAppointments() {
+        List<AppointmentWithPatient> appointmentList = db.appointmentDao().getAllAppointmentsWithPatient();
+        adapter.setAppointments(appointmentList);
     }
 
     private void refreshAppointments() {
-        List<Appointment> updatedList = db.appointmentDao().getAll();
+        List<AppointmentWithPatient> updatedList = db.appointmentDao().getAllAppointmentsWithPatient();
         adapter.setAppointments(updatedList);
-        adapter.notifyDataSetChanged();
     }
 }

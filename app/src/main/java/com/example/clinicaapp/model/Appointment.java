@@ -1,5 +1,6 @@
 package com.example.clinicaapp.model;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -10,7 +11,8 @@ public class Appointment {
     public int id;
 
     public int patientId;
-    public int doctorId;
+    @ColumnInfo(name = "doctor_name")
+    public String doctorName;
     public String date;
     public String time;
     public String status; // Confirmada, Pendiente, etc.
@@ -26,10 +28,9 @@ public class Appointment {
         return patientId;
     }
 
-    public int getDoctorId() {
-        return doctorId;
+    public String getDoctorName(){
+        return doctorName;
     }
-
     public String getDate() {
         return date;
     }
@@ -53,9 +54,6 @@ public class Appointment {
         this.id = id;
     }
 
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
-    }
 
     public void setPatientId(int patientId) {
         this.patientId = patientId;
@@ -76,7 +74,4 @@ public class Appointment {
     // Campo no persistente para mostrar en RecyclerView
     @Ignore
     public String patientName;
-
-    @Ignore
-    public String doctorName;
 }

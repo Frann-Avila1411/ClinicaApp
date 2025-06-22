@@ -7,6 +7,7 @@ import androidx.room.Delete;
 import androidx.room.Update;
 
 import com.example.clinicaapp.model.Appointment;
+import com.example.clinicaapp.model.AppointmentWithPatient;
 
 import java.util.List;
 
@@ -25,8 +26,8 @@ public interface AppointmentDao {
     @Delete
     void delete(Appointment appointment);
 
-    @Query("SELECT * FROM appointments WHERE doctorId = :doctorId")
-    List<Appointment> getAppointmentsByDoctor(int doctorId);
+    @Query("SELECT a.*, u.name AS patientName FROM appointments a INNER JOIN users u ON a.patientId = u.id")
+    List<AppointmentWithPatient> getAllAppointmentsWithPatient();
 
     @Query("SELECT * FROM appointments WHERE patientId = :patientId")
     List<Appointment> getAppointmentsByPatient(int patientId);
