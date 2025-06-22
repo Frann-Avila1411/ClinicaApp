@@ -13,8 +13,17 @@ import java.util.List;
 @Dao
 public interface AppointmentDao {
 
+    @Query("SELECT * FROM appointments")
+    List<Appointment> getAll();
+
     @Insert
     void insert(Appointment appointment);
+
+    @Update
+    void update(Appointment appointment);
+
+    @Delete
+    void delete(Appointment appointment);
 
     @Query("SELECT * FROM appointments WHERE doctorId = :doctorId")
     List<Appointment> getAppointmentsByDoctor(int doctorId);
@@ -22,9 +31,6 @@ public interface AppointmentDao {
     @Query("SELECT * FROM appointments WHERE patientId = :patientId")
     List<Appointment> getAppointmentsByPatient(int patientId);
 
-    @Delete
-    void delete(Appointment appointment);
-
-    @Update
-    void update(Appointment appointment);
+    @Query("SELECT * FROM appointments WHERE id = :appointmentId LIMIT 1")
+    Appointment getById(int appointmentId);
 }

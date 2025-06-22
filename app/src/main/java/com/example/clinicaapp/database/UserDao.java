@@ -17,8 +17,8 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE email = :email AND password = :password LIMIT 1")
     User login(String email, String password);
 
-    @Query("SELECT * FROM users WHERE id = :id")
-    User getUserById(int id);
+    @Query("SELECT * FROM users WHERE id = :userId")
+    User getUserById(int userId);
 
     @Query("SELECT * FROM users")
     List<User> getAllUsers();
@@ -28,4 +28,7 @@ public interface UserDao {
 
     @Query("SELECT name FROM users WHERE id = :userId")
     String getUserNameById(int userId);
+
+    @Query("SELECT Name FROM users WHERE id = :id")
+    String getNameById(int id);
 }

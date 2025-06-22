@@ -12,4 +12,8 @@ public class User {
     public String email;
     public String password;
     public String userType; // "Paciente" o "Medico"
+
+    public String getName() {
+        return name;
+    }
 }

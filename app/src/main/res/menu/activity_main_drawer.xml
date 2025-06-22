@@ -9,6 +9,22 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
         <item
+            android:id="@+id/nav_appointments"
+            android:icon="@drawable/baseline_medical_services_24"
+            android:title="Citas Médicas" />
+        <item
+            android:id="@+id/nav_medical_records"
+            android:icon="@drawable/baseline_app_registration_24"
+            android:title="Expedientes"/>
+        <item
+            android:id="@+id/nav_add_appointment"
+            android:icon="@drawable/baseline_add_24"
+            android:title="Agregar Cita"/>
+        <item
+            android:id="@+id/nav_add_medical_record"
+            android:icon="@drawable/baseline_cancel_24"
+            android:title="Agregar Expediente"/>
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/baseline_logout_24"
             android:title="Cerrar sesión" />

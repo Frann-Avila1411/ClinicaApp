@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etPatientId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ID del Paciente"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/etDiagnosis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Diagnóstico"
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:gravity="top|start" />
+
+        <EditText
+            android:id="@+id/etPrescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Prescripción"
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:gravity="top|start" />
+
+        <EditText
+            android:id="@+id/etDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fecha (ej. 2025-06-21)"
+            android:inputType="date" />
+
+        <Button
+            android:id="@+id/btnSaveRecord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar Expediente"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</ScrollView>
